@@ -3,10 +3,7 @@ package com.zetcode;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -23,14 +20,18 @@ public class project {
             CsvValidationException, ArgumentException {
 
         var fileName = "C:\\Users\\сева\\Desktop\\ert.csv";
+        FileInputStream fis = new FileInputStream(fileName);
+        InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+        BufferedReader br = new BufferedReader(isr);
 
-        var filereader = new FileReader(fileName, StandardCharsets.UTF_8);
-        var csvReader = new CSVReader(filereader);
 
-        String[] nextLine;
+
+        String linefr;
+
         CollectionManager collectionManager = new CollectionManager();
 
-        while ((nextLine = csvReader.readNext()) != null) {
+        while ((linefr = br.readLine()) != null) {
+            String[] nextLine = linefr.split(",");
             collectionManager.addTicket(new Ticket(nextLine[0], new Coordinates(Float.parseFloat(nextLine[1]),Long.parseLong(nextLine[2])),Float.parseFloat(nextLine[3]),Long.parseLong(nextLine[4]),nextLine[5],new Person(Float.parseFloat(nextLine[6]),nextLine[7],nextLine[8],nextLine[9],new Location(Long.parseLong(nextLine[10]),Double.parseDouble(nextLine[11]), nextLine[12]))));
         }
         Command com = new Command(collectionManager);
