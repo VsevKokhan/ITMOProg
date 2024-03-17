@@ -6,6 +6,12 @@ import exception.ArgumentException;
  */
 public class Person {
 
+
+    private float height;//Значение поля должно быть больше 0
+    private Color eyeColor;//Поле может быть null
+    private Color hairColor;//Поле не может быть null
+    private Country nationality;//Поле может быть null
+    private Location location;//Поле не может быть null
     public float getHeight() {
         return height;
     }
@@ -25,11 +31,6 @@ public class Person {
     public Location getLocation() {
         return location;
     }
-    private float height;//Значение поля должно быть больше 0
-    private Color eyeColor;//Поле может быть null
-    private Color hairColor;//Поле не может быть null
-    private Country nationality;//Поле может быть null
-    private Location location;//Поле не может быть null
 
     public Person(float height, String _eyeColor, String _hairColor, String _nationality, Location location) throws ArgumentException {
         if(height < 0) throw new ArgumentException("height must be more 0!");
