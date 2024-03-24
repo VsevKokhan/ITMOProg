@@ -1,7 +1,6 @@
 package com.zetcode;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
+
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -16,10 +15,9 @@ import models.*;
 //"C:\\Users\\сева\\Desktop\\ert1.txt"
 public class project {
 
-    public static void main(String[] args) throws IOException,
-            CsvValidationException, ArgumentException {
+    public static void main(String[] args) throws IOException, ArgumentException {
 
-        var fileName = "C:\\Users\\сева\\Desktop\\ert.csv";
+        var fileName = "FileRead.csv";
         FileInputStream fis = new FileInputStream(fileName);
         InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(isr);
@@ -77,7 +75,7 @@ public class project {
                     Command.clear();
                     break;
                 case "save":
-                    Command.save("C:\\Users\\сева\\Desktop\\ert1.txt");
+                    Command.save("SaveFile.csv");
                     break;
                 case "add_if_max":
                     Command.add_if_max();
@@ -125,6 +123,7 @@ public class project {
 
 
         }
+
 
 
 //C:\Users\сева\Desktop\pop.txt

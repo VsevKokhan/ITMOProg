@@ -17,8 +17,29 @@ public class Command {
     {
         this.collectionManager = collectionManager;
     }
+    static class FixedQueue<T> {
+        private LinkedList<T> queue = new LinkedList<>();
+        private final int maxSize;
 
-    private static List<String> namesOfCommands = new ArrayList<String>();
+        public FixedQueue(int maxSize) {
+            this.maxSize = maxSize;
+        }
+
+        public void add(T element) {
+            queue.add(element);
+            if (queue.size() > maxSize) {
+                queue.removeFirst();
+            }
+        }
+
+        public void print() {
+            for (T element : queue) {
+                System.out.println(element);
+            }
+        }
+    }
+
+    private static FixedQueue<String> namesOfCommands = new FixedQueue<String>(11);
     /**
      * Команда 'help'. Добавляет новый элемент в коллекцию.
      */
@@ -58,14 +79,7 @@ public class Command {
      */
     public static void history()
     {
-        namesOfCommands.add("history");
-        int elementsToPrint = Math.min(namesOfCommands.size(), 11); // Определяем количество элементов для вывода
-
-        // Выводим последние elementsToPrint элементов списка
-        for (int i = namesOfCommands.size() - elementsToPrint; i < namesOfCommands.size(); i++) {
-            System.out.println(namesOfCommands.get(i));
-        }
-
+        namesOfCommands.print();
 
     }
     /**
@@ -76,32 +90,7 @@ public class Command {
         var col = collectionManager.getCollection();
         for (var tick: col)
         {
-            System.out.println();
-            System.out.println("ticket id: " + tick.getId());
-            System.out.println("ticket name: " + tick.getName());
-
-            var cor = tick.getCoordinates();
-            System.out.println("coordinates x: " + cor.getX());
-            System.out.println("coordinates y: " + cor.getY());
-
-            System.out.println("ticket CreationDate: " + tick.getCreationDate());
-            System.out.println("ticket price: " +tick.getPrice());
-            System.out.println("ticket discount: " +tick.getDiscount());
-            System.out.println("ticket type: " +tick.getType());
-
-            var pers = tick.getPerson();
-            if(pers != null) {
-                System.out.println("person height: " + pers.getHeight());
-                System.out.println("person eyecolor: " + pers.getEyeColor());
-                System.out.println("person haircolor: " + pers.getHairColor());
-                System.out.println("person nationality: " + pers.getNationality());
-
-                var loc = pers.getLocation();
-                System.out.println("location x: " + loc.getX());
-                System.out.println("location y: " + loc.getY());
-                System.out.println("location name: " + loc.getName());
-            }
-            else System.out.println("person is : " + pers);
+            System.out.println(tick.toString());
 
         }
         namesOfCommands.add("show");
@@ -127,35 +116,7 @@ public class Command {
         {
             if (tick.getId() == id)
             {
-                tickNow = tick;
-
-                System.out.println();
-                System.out.println("ticket id: " + tick.getId());
-                System.out.println("ticket name: " + tick.getName());
-
-                var cor = tick.getCoordinates();
-                System.out.println("coordinates x: " + cor.getX());
-                System.out.println("coordinates y: " + cor.getY());
-
-                System.out.println("ticket CreationDate: " + tick.getCreationDate());
-                System.out.println("ticket price: " +tick.getPrice());
-                System.out.println("ticket discount: " +tick.getDiscount());
-                System.out.println("ticket type: " +tick.getType());
-
-                var pers = tick.getPerson();
-                if(pers != null) {
-                    System.out.println("person height: " + pers.getHeight());
-                    System.out.println("person eyecolor: " + pers.getEyeColor());
-                    System.out.println("person haircolor: " + pers.getHairColor());
-                    System.out.println("person nationality: " + pers.getNationality());
-
-                    var loc = pers.getLocation();
-                    System.out.println("location x: " + loc.getX());
-                    System.out.println("location y: " + loc.getY());
-                    System.out.println("location name: " + loc.getName());
-                }
-                else System.out.println("person is : " + pers);
-                break;
+                System.out.println(tick.toString());
 
             }
         }
@@ -1358,40 +1319,12 @@ public class Command {
         {
             if(tick.getName().contains(NameForFilter))
             {
-                System.out.println();
-                System.out.println("ticket id: " + tick.getId());
-                System.out.println("ticket name: " + tick.getName());
-
-                var cor = tick.getCoordinates();
-                System.out.println("coordinates x: " + cor.getX());
-                System.out.println("coordinates y: " + cor.getY());
-
-                System.out.println("ticket CreationDate: " + tick.getCreationDate());
-                System.out.println("ticket price: " +tick.getPrice());
-                System.out.println("ticket discount: " +tick.getDiscount());
-                System.out.println("ticket type: " +tick.getType());
-
-                var pers = tick.getPerson();
-                if(pers != null) {
-                    System.out.println("person height: " + pers.getHeight());
-                    System.out.println("person eyecolor: " + pers.getEyeColor());
-                    System.out.println("person haircolor: " + pers.getHairColor());
-                    System.out.println("person nationality: " + pers.getNationality());
-
-                    var loc = pers.getLocation();
-                    System.out.println("location x: " + loc.getX());
-                    System.out.println("location y: " + loc.getY());
-                    System.out.println("location name: " + loc.getName());
-                }
-                else System.out.println("person is : " + pers);
+                System.out.println(tick.toString());
 
             }
 
 
-
-
         }
-        System.out.println();
         System.out.println("Элементы выведены");
         namesOfCommands.add("filter_contains_name");
     }

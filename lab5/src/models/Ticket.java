@@ -3,9 +3,7 @@ package models;
 import exception.ArgumentException;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Date;
-import java.util.TreeSet;
+
 /**
  * Класс билетов
  */
@@ -156,5 +154,37 @@ public class Ticket  implements Comparable<Ticket>{
     public int compareTo(Ticket other) {
         return id.compareTo(other.getId());
     }
+    @Override
+    public String toString()
+    {
+        String ans = "";
+        ans += "id: " + ((Integer)getId()).toString() + "\n";
+        ans += "Name: " +getName().toString() + "\n";
+
+        var cor = getCoordinates();
+        ans+= "coordinates X: " +((Float)cor.getX()).toString()+ "\n";
+        ans+= "coordinates Y: " + cor.getY().toString()+ "\n";
+
+        ans+= "Date: " +getCreationDate().toString()+ "\n";
+        ans += "Price: " +((Float)getPrice()).toString()+ "\n";
+        ans += "Discount: " + (getDiscount() == null ? "" : getDiscount().toString())+ "\n";
+        ans += "TicketType: " +getType().toString() + "\n";
+
+        var pers = getPerson();
+        if(pers != null) {
+            ans += "Person height: " +((Float)pers.getHeight()).toString()+ "\n";
+            ans += "Person EyeColor: " +(pers.getEyeColor() == null ? "" : pers.getEyeColor().toString())+ "\n";
+            ans += "Person HairColor: " +pers.getHairColor().toString()+ "\n";
+            ans+=  "Person Nationality: " +(pers.getNationality() == null ? "" : pers.getNationality().toString()) +  "\n";
+
+            var loc = pers.getLocation();
+            ans += "location x: " + loc.getX().toString()+ "\n";
+            ans += "location y: " + loc.getY().toString()+ "\n";
+            ans += "location name: " + (loc.getName() == null ? "" : loc.getName()) +"\n";
+        }
+        else ans += "person is : null";
+        return ans;
+    }
+
 
 }
