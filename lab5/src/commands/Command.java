@@ -11,7 +11,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class Command {
+public class Commands {
     private static CollectionManager collectionManager;
     public Command(CollectionManager collectionManager)
     {
